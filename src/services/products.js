@@ -15,3 +15,14 @@ export const createProducts = async (payload) => {
   const product = await ProductCollection.create(payload);
   return product;
 };
+
+export const updateProduct = async (productId, payload) => {
+  const product = await ProductCollection.findOneAndUpdate(
+    { _id: productId },
+    payload,
+    {
+      new: true,
+    },
+  );
+  return product;
+};
