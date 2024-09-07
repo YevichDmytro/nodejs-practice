@@ -26,3 +26,9 @@ export const updateProduct = async (productId, payload) => {
   );
   return product;
 };
+
+export const deleteProduct = async (id) => {
+  const deletedProduct = await ProductCollection.findByIdAndDelete({ _id: id });
+
+  return deletedProduct;
+};
