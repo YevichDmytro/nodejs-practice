@@ -5,3 +5,8 @@ export const getAllProducts = async () => {
 
   return products;
 };
+
+export const getProductsById = async (productId) => {
+  const product = await ProductCollection.findById(productId);
+  return product;
+};
