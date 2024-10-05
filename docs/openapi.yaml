@@ -12,7 +12,7 @@ tags:
   - name: Auth
     description: Operations about authentication and authorization
 servers:
-  - url: http://localhost:3000
+  - url: http://localhost:3001
 paths:
   /products:
     get:

@@ -9,6 +9,7 @@ import { notFoundHandler } from './middlewares/notFoundHandler.js';
 import productsRouter from './routers/products.js';
 import userRouter from './routers/user.js';
 import cookieParser from 'cookie-parser';
+import { swaggerDocs } from './middlewares/swaggerDocs.js';
 
 const PORT = Number(env('PORT', '3001'));
 
@@ -21,6 +22,7 @@ export const setupServer = () => {
 
   app.use('/products', productsRouter);
   app.use('/user', userRouter);
+  app.use('/api-docs', swaggerDocs());
 
   app.use('*', notFoundHandler);
 
