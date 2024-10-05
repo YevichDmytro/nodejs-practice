@@ -24,6 +24,8 @@ paths:
   /products/{id}:
     get:
       $ref: '../swagger/paths/products/{id}/get.yaml'
+    delete:
+      $ref: '../swagger/paths/products/{id}/delete.yaml'
 components:
   securitySchemes:
     bearerAuth:
