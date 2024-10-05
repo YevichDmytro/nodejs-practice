@@ -19,6 +19,8 @@ paths:
       $ref: '../swagger/paths/products/get.yaml'
     post:
       $ref: '../swagger/paths/products/post.yaml'
+    patch:
+      $ref: '../swagger/paths/products/patch.yaml'
   /products/{id}:
     get:
       $ref: '../swagger/paths/products/{id}/get.yaml'
