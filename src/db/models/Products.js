@@ -1,7 +1,14 @@
 import { Schema, model } from 'mongoose';
 
+import { categoryList } from '../../constants/products.js';
+
 const productsSchema = new Schema(
   {
+    userId: {
+      type: Schema.Types.ObjectId,
+      ref: 'users',
+      required: true,
+    },
     name: {
       type: String,
       required: true,
@@ -13,7 +20,7 @@ const productsSchema = new Schema(
     category: {
       type: String,
       required: true,
-      enum: ['books', 'electronics', 'clothing', 'other'],
+      enum: categoryList,
       default: 'other',
     },
     description: {

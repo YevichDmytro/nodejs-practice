@@ -1,3 +1,5 @@
+import createHttpError from 'http-errors';
+
 import {
   getAllProducts,
   getProductsById,
@@ -5,10 +7,14 @@ import {
   updateProduct,
   deleteProduct,
 } from '../services/products.js';
-import createHttpError from 'http-errors';
+
+import { parseFilterCategoryParams } from '../utils/parseFilterCategoryParams.js';
 
 export const getAllProductsController = async (req, res, next) => {
-  const data = await getAllProducts();
+  const filter = parseFilterCategoryParams(req.query);
+  const { _id: userId } = req.user;
+
+  const data = await getAllProducts({ filter, userId });
 
   res.json({
     status: 200,
@@ -18,7 +24,8 @@ export const getAllProductsController = async (req, res, next) => {
 };
 
 export const getProductsControllerById = async (req, res, next) => {
-  const data = await getProductsById(req.params.productId);
+  const { _id: userId } = req.user;
+  const data = await getProductsById({ _id: req.params.productId, userId });
 
   if (!data) {
     throw createHttpError(404, 'Product not found');
@@ -31,7 +38,8 @@ export const getProductsControllerById = async (req, res, next) => {
 };
 
 export const createProductsController = async (req, res) => {
-  const data = await createProducts(req.body);
+  const { _id: userId } = req.user;
+  const data = await createProducts({ ...req.body, userId });
 
   res.status(201).json({
     status: 201,
@@ -41,8 +49,9 @@ export const createProductsController = async (req, res) => {
 };
 
 export const updateProductController = async (req, res) => {
+  const { _id: userId } = req.user;
   const { productId } = req.params;
-  const data = await updateProduct(productId, req.body);
+  const data = await updateProduct({ _id: productId, userId }, req.body);
 
   if (!data) throw createHttpError(404, 'Product not found');
 
@@ -54,9 +63,10 @@ export const updateProductController = async (req, res) => {
 };
 
 export const deleteProductController = async (req, res) => {
+  const { _id: userId } = req.user;
   const { productId } = req.params;
 
-  const data = await deleteProduct(productId);
+  const data = await deleteProduct({ _id: productId, userId });
 
   if (!data) throw createHttpError(404, 'Product not found');
 
