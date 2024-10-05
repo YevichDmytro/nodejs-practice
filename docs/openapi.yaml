@@ -5,8 +5,7 @@ info:
   license:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
-  description: >
-    This is a documentation about Products app
+  description: This is a documentation about Products app
 tags:
   - name: Products
     description: Operations about Products
@@ -14,7 +13,6 @@ tags:
     description: Operations about authentication and authorization
 servers:
   - url: http://localhost:3000
-  - url: #посилання на задеплоєний сайт
 paths:
   /products:
     get:
